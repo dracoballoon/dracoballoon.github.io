@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Draco</title>
-    <meta name="description" content="Draco - Art gallery featuring digital, traditional & special projects." />
+    <meta name="description" content="Draco - Art gallery featuring comic, original, comms, memes & stickers." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap" rel="stylesheet" />
@@ -275,28 +275,49 @@
         <h1>DRACO</h1>
       </div>
       
+      <!-- Original Section -->
       <div class="gallery-section">
-        <h2>Digital Art</h2>
-        <div id="gallery-digital" class="image-placeholder" aria-busy="true">
-          <div class="gallery-loading">Loading digital artworks...</div>
+        <h2>Original</h2>
+        <div id="gallery-original" class="image-placeholder" aria-busy="true">
+          <div class="gallery-loading">Loading original pieces...</div>
         </div>
-        <div class="show-more-container" id="showmore-digital"></div>
+        <div class="show-more-container" id="showmore-original"></div>
       </div>
       
+      <!-- Comms Section -->
       <div class="gallery-section">
-        <h2>Traditional Art</h2>
-        <div id="gallery-traditional" class="image-placeholder" aria-busy="true">
-          <div class="gallery-loading">Loading traditional pieces...</div>
+        <h2>Comms</h2>
+        <div id="gallery-comms" class="image-placeholder" aria-busy="true">
+          <div class="gallery-loading">Loading commissions...</div>
         </div>
-        <div class="show-more-container" id="showmore-traditional"></div>
+        <div class="show-more-container" id="showmore-comms"></div>
       </div>
       
+      <!-- Comic Section -->
       <div class="gallery-section">
-        <h2>Special Projects</h2>
-        <div id="gallery-projects" class="image-placeholder" aria-busy="true">
-          <div class="gallery-loading">Loading projects...</div>
+        <h2>Comic</h2>
+        <div id="gallery-comic" class="image-placeholder" aria-busy="true">
+          <div class="gallery-loading">Loading comic artworks...</div>
         </div>
-        <div class="show-more-container" id="showmore-projects"></div>
+        <div class="show-more-container" id="showmore-comic"></div>
+      </div>
+      
+      <!-- Stickers Section -->
+      <div class="gallery-section">
+        <h2>Stickers</h2>
+        <div id="gallery-stickers" class="image-placeholder" aria-busy="true">
+          <div class="gallery-loading">Loading stickers...</div>
+        </div>
+        <div class="show-more-container" id="showmore-stickers"></div>
+      </div>
+      
+      <!-- Memes Section -->
+      <div class="gallery-section">
+        <h2>Memes</h2>
+        <div id="gallery-memes" class="image-placeholder" aria-busy="true">
+          <div class="gallery-loading">Loading memes...</div>
+        </div>
+        <div class="show-more-container" id="showmore-memes"></div>
       </div>
       
       <footer>
@@ -311,12 +332,14 @@
         CACHE_TTL: 24 * 60 * 60 * 1000,
         API_BASE: 'https://api.github.com/repos/dracoballoon/dracoballoon.github.io/contents/projects',
         FALLBACK_IMAGES: {
-          digital: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Digital+Art'],
-          traditional: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Traditional+Art'],
-          projects: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Special+Projects']
+          original: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Original'],
+          comms: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Comms'],
+          comic: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Comic'],
+          stickers: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Stickers'],
+          memes: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Memes']
         },
-        LOADER_DURATION: 5000,     // Exactly 5 seconds
-        QUOTE_INTERVAL: 2800       // Rotate every 2.8s
+        LOADER_DURATION: 5000,
+        QUOTE_INTERVAL: 2800
       };
 
       // Discrete furry-coded loading quotes
@@ -341,9 +364,11 @@
       // === STATE ===
       const state = {
         galleries: {
-          digital: { images: [], expanded: false, loaded: false },
-          traditional: { images: [], expanded: false, loaded: false },
-          projects: { images: [], expanded: false, loaded: false }
+          original: { images: [], expanded: false, loaded: false },
+          comms: { images: [], expanded: false, loaded: false },
+          comic: { images: [], expanded: false, loaded: false },
+          stickers: { images: [], expanded: false, loaded: false },
+          memes: { images: [], expanded: false, loaded: false }
         },
         loaderHidden: false,
         quoteInterval: null,
@@ -376,7 +401,6 @@
         const quoteEl = document.getElementById('loaderQuote');
         if (!quoteEl) return;
 
-        // 🎲 Random starting quote
         state.currentQuoteIndex = Math.floor(Math.random() * LOADER_QUOTES.length);
         quoteEl.textContent = LOADER_QUOTES[state.currentQuoteIndex];
 
@@ -555,10 +579,7 @@
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // 🎲 Start random quote & rotation
         startQuoteRotation();
-
-        // ⏱️ Fixed 5-second loader duration
         setTimeout(() => hideLoader(), CONFIG.LOADER_DURATION);
 
         // Banner load
@@ -569,11 +590,13 @@
           bg.src = 'https://dayowen.github.io/assets/banner.jpeg';
         }
 
-        // Load galleries
+        // Load galleries in new order
         Promise.allSettled([
-          loadGallery('gallery-digital', 'digital', 'Digital Art'),
-          loadGallery('gallery-traditional', 'traditional', 'Traditional Art'),
-          loadGallery('gallery-projects', 'projects', 'Special Projects')
+          loadGallery('gallery-original', 'original', 'Original'),
+          loadGallery('gallery-comms', 'comms', 'Comms'),
+          loadGallery('gallery-comic', 'comic', 'Comic'),
+          loadGallery('gallery-stickers', 'stickers', 'Stickers'),
+          loadGallery('gallery-memes', 'memes', 'Memes')
         ]);
       });
 
