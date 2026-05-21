@@ -30,76 +30,10 @@
         --shadow: 0 4px 20px rgba(0, 0, 0, 0.06); --shadow-hover: 0 12px 35px rgba(196, 69, 85, 0.15);
         --glow: 0 0 20px rgba(196, 69, 85, 0.08);
         --banner-overlay: linear-gradient(180deg, transparent 40%, rgba(20,20,22,0.65) 100%);
-        --banner-text-gradient: linear-gradient(135deg, #e0e0e0, #b09090); /* SAME AS DARK MODE */
+        --banner-text-gradient: linear-gradient(135deg, #e0e0e0, #b09090);
         --banner-text-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
         --banner-text-border: rgba(255, 255, 255, 0.5);
       }
-      
-      .liminal-bg { 
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-        pointer-events: none; z-index: -9999; overflow: hidden; 
-        contain: layout style paint; will-change: transform;
-        background: radial-gradient(ellipse at top, #252528 0%, var(--bg) 70%);
-        transition: background 0.4s ease;
-      }
-      [data-theme="light"] .liminal-bg { background: radial-gradient(ellipse at top, #fff5f6 0%, #fafafa 70%); }
-      
-      .drift-glow { 
-        position: absolute; width: 550px; height: 550px; bottom: -180px; left: -180px; 
-        opacity: 0.12; filter: blur(70px); mix-blend-mode: screen; 
-        animation: drift-br-tr 60s infinite alternate ease-in-out; 
-        background: radial-gradient(circle at 40% 30%, var(--accent-glow) 0%, transparent 50%), 
-                    radial-gradient(circle at 70% 60%, rgba(139, 0, 0, 0.15) 0%, transparent 65%);
-        will-change: transform; contain: strict; transition: opacity 0.4s ease, background 0.4s ease;
-      }
-      [data-theme="light"] .drift-glow {
-        opacity: 0.06;
-        background: radial-gradient(circle at 40% 30%, var(--accent-glow) 0%, transparent 50%), 
-                    radial-gradient(circle at 70% 60%, rgba(196, 69, 85, 0.08) 0%, transparent 65%);
-      }
-      @keyframes drift-br-tr { 
-        0% { transform: translate3d(0, 0, 0); } 
-        100% { transform: translate3d(calc(100vw + 350px), calc(-100vh - 350px), 0); } 
-      }
-      
-      .loader { 
-        position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; 
-        background: var(--bg); z-index: 99999; font-size: 1.05rem; letter-spacing: 3px; 
-        color: var(--fg); transition: opacity .45s ease, visibility .45s ease, background-color 0.4s ease, color 0.4s ease; 
-        font-family: 'Unbounded', sans-serif; contain: layout style;
-        flex-direction: column; gap: 22px; padding: 20px;
-      }
-      .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-      .loader-inner { display: flex; gap: 14px; align-items: center; }
-      .loader .label { 
-        font-weight: 700; text-transform: uppercase; color: var(--accent-light); 
-        font-size: 1.15rem; letter-spacing: 5px; transition: color 0.4s ease;
-      }
-      [data-theme="light"] .loader .label { color: var(--accent); }
-      .loader .dots { display: inline-block; width: 45px; text-align: left; }
-      .loader .dots span { 
-        display: inline-block; width: 6px; height: 6px; margin-right: 8px; 
-        border-radius: 50%; background: var(--accent); opacity: .25; 
-        transform: translateY(0); animation: dot 1.2s infinite linear; 
-        will-change: transform, opacity;
-        box-shadow: 0 0 6px rgba(139, 0, 0, 0.4); transition: background 0.4s ease, box-shadow 0.4s ease;
-      }
-      [data-theme="light"] .loader .dots span { box-shadow: 0 0 6px rgba(196, 69, 85, 0.25); }
-      .loader .dots span:nth-child(1){ animation-delay: 0s } 
-      .loader .dots span:nth-child(2){ animation-delay: 0.12s } 
-      .loader .dots span:nth-child(3){ animation-delay: 0.24s }
-      @keyframes dot { 
-        0%, 100% { opacity: .25; transform: translateY(0) scale(.95); } 
-        45% { opacity: 1; transform: translateY(-5px) scale(1); } 
-      }
-      
-      .loader-quote {
-        font-size: 0.92rem; color: var(--fg-muted); text-align: center; max-width: 80%;
-        line-height: 1.5; opacity: 0.75; transform: translateY(8px);
-        animation: quoteSlideIn .4s ease forwards; font-weight: 400;
-        letter-spacing: 0.8px; transition: opacity 0.2s ease, color 0.4s ease;
-      }
-      @keyframes quoteSlideIn { to { transform: translateY(0); } }
       
       * { box-sizing: border-box; }
       html { height: 100%; scroll-behavior: smooth; }
@@ -110,7 +44,7 @@
       }
       .container { 
         max-width: 1100px; margin: 0 auto; padding: 60px 20px 100px; 
-        position: relative; z-index: 2; contain: layout style; 
+        position: relative; z-index: 2; 
       }
       
       /* ===== THEME TOGGLE BUTTON ===== */
@@ -186,12 +120,12 @@
         box-shadow: 0 0 10px rgba(139, 0, 0, 0.5); transition: background 0.4s ease, box-shadow 0.4s ease;
       }
       
-      .image-placeholder { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 20px; contain: layout; }
+      .image-placeholder { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 20px; }
       .image-box {
         position: relative; height: 285px; border-radius: var(--card-radius);
         overflow: hidden; background: var(--card-bg); box-shadow: var(--shadow);
         transition: transform .3s cubic-bezier(.2,.9,.2,1), box-shadow .3s, border-color .3s, background-color 0.4s ease;
-        border: 1px solid var(--border); contain: layout style; will-change: transform; cursor: pointer;
+        border: 1px solid var(--border); cursor: pointer;
       }
       .image-box img.thumb { 
         width: 100%; height: 100%; object-fit: cover; display: block; 
@@ -276,6 +210,44 @@
       [data-theme="light"] .lightbox-close:hover { color: var(--accent); background: rgba(196, 69, 85, 0.1); border-color: var(--accent); }
       .lightbox-overlay { position: absolute; inset: 0; cursor: pointer; }
       
+      .loader { 
+        position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; 
+        background: var(--bg); z-index: 99999; font-size: 1.05rem; letter-spacing: 3px; 
+        color: var(--fg); transition: opacity .45s ease, visibility .45s ease, background-color 0.4s ease, color 0.4s ease; 
+        font-family: 'Unbounded', sans-serif;
+        flex-direction: column; gap: 22px; padding: 20px;
+      }
+      .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+      .loader-inner { display: flex; gap: 14px; align-items: center; }
+      .loader .label { 
+        font-weight: 700; text-transform: uppercase; color: var(--accent-light); 
+        font-size: 1.15rem; letter-spacing: 5px; transition: color 0.4s ease;
+      }
+      [data-theme="light"] .loader .label { color: var(--accent); }
+      .loader .dots { display: inline-block; width: 45px; text-align: left; }
+      .loader .dots span { 
+        display: inline-block; width: 6px; height: 6px; margin-right: 8px; 
+        border-radius: 50%; background: var(--accent); opacity: .25; 
+        transform: translateY(0); animation: dot 1.2s infinite linear; 
+        box-shadow: 0 0 6px rgba(139, 0, 0, 0.4); transition: background 0.4s ease, box-shadow 0.4s ease;
+      }
+      [data-theme="light"] .loader .dots span { box-shadow: 0 0 6px rgba(196, 69, 85, 0.25); }
+      .loader .dots span:nth-child(1){ animation-delay: 0s } 
+      .loader .dots span:nth-child(2){ animation-delay: 0.12s } 
+      .loader .dots span:nth-child(3){ animation-delay: 0.24s }
+      @keyframes dot { 
+        0%, 100% { opacity: .25; transform: translateY(0) scale(.95); } 
+        45% { opacity: 1; transform: translateY(-5px) scale(1); } 
+      }
+      
+      .loader-quote {
+        font-size: 0.92rem; color: var(--fg-muted); text-align: center; max-width: 80%;
+        line-height: 1.5; opacity: 0.75; transform: translateY(8px);
+        animation: quoteSlideIn .4s ease forwards; font-weight: 400;
+        letter-spacing: 0.8px; transition: opacity 0.2s ease, color 0.4s ease;
+      }
+      @keyframes quoteSlideIn { to { transform: translateY(0); } }
+      
       @media (max-width: 900px) {
         h1 { font-size: 2.5rem; } .banner { height: 230px; } .banner h1 { font-size: 2.1rem; }
         .image-placeholder { grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); }
@@ -295,15 +267,12 @@
       
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-        .drift-glow { display: none; } .lightbox { transition: none; } .theme-toggle { transition: none; } .theme-ripple { display: none; }
+        .lightbox { transition: none; } .theme-toggle { transition: none; } .theme-ripple { display: none; }
       }
-      @media (max-width: 768px) { .drift-glow { display: none; } }
       .image-box { aspect-ratio: 215/285; }
-      body::before, body::after, .container::before, .container::after { display: none !important; }
     </style>
   </head>
   <body>
-    <div class="liminal-bg"><div class="drift-glow"></div></div>
     <div class="theme-ripple" id="themeRipple"></div>
     
     <!-- Theme Toggle Button -->
@@ -339,7 +308,7 @@
     </div>
     
     <script>
-      // === THEME MANAGEMENT (Fixed Scroll) ===
+      // === THEME MANAGEMENT ===
       const ThemeManager = {
         STORAGE_KEY: 'draco-theme-preference',
         DEFAULT: 'dark',
@@ -441,7 +410,6 @@
         if (state.quoteInterval) { clearInterval(state.quoteInterval); state.quoteInterval = null; }
       }
 
-      // === SCROLL FIX: Always release overflow ===
       function releaseScroll() {
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
@@ -453,12 +421,12 @@
         const loader = document.getElementById('siteLoader');
         if (loader) {
           loader.classList.add('hidden');
-          releaseScroll(); // CRITICAL FIX
+          releaseScroll();
           state.loaderHidden = true;
         }
       }
 
-      // === LIGHTBOX (Fixed Scroll) ===
+      // === LIGHTBOX ===
       const lightbox = {
         el: document.getElementById('lightbox'),
         img: document.getElementById('lightboxImage'),
@@ -468,12 +436,12 @@
           if (!this.el || !this.img) return;
           this.img.src = src;
           this.el.classList.add('active');
-          document.body.style.overflow = 'hidden'; // Lock scroll only when open
+          document.body.style.overflow = 'hidden';
         },
         close() {
           if (!this.el) return;
           this.el.classList.remove('active');
-          releaseScroll(); // CRITICAL FIX
+          releaseScroll();
           setTimeout(() => { if (this.img) this.img.src = ''; }, 300);
         },
         init() {
@@ -484,7 +452,7 @@
         }
       };
 
-      // === LAZY IMAGE LOADER (Original) ===
+      // === LAZY IMAGE LOADER ===
       class LazyImageLoader {
         constructor() { this.observer = null; this.init(); }
         init() {
@@ -507,8 +475,8 @@
       }
       const lazyLoader = new LazyImageLoader();
 
-      // === GALLERY LOADING (Original) ===
-      async function loadGallery(containerId, folderName, sectionTitle) {
+      // === GALLERY LOADING ===
+      async function loadGallery(containerId, folderName) {
         const container = document.getElementById(containerId); const cacheKey = `gallery:${folderName}`;
         try {
           let files = cache.get(cacheKey);
@@ -565,38 +533,23 @@
 
       // === INIT ===
       document.addEventListener('DOMContentLoaded', () => {
-        // Initialize theme FIRST
         ThemeManager.init();
-        
         if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
         document.getElementById('year').textContent = new Date().getFullYear();
-        
         startQuoteRotation();
         setTimeout(() => hideLoader(), CONFIG.LOADER_DURATION);
-        
-        // Safety: Ensure scroll is enabled after loader hides
         setTimeout(() => releaseScroll(), CONFIG.LOADER_DURATION + 100);
-        
         lightbox.init();
-        
-        // Banner load
         const banner = document.querySelector('.banner');
         if (banner) { const bg = new Image(); bg.onload = bg.onerror = () => banner.classList.add('loaded'); bg.src = 'https://dayowen.github.io/assets/banner.jpeg'; }
-        
-        // Load galleries
         Promise.allSettled([
-          loadGallery('gallery-original', 'original', 'Original'),
-          loadGallery('gallery-comms', 'comms', 'Comms'),
-          loadGallery('gallery-comic', 'comic', 'Comic'),
-          loadGallery('gallery-stickers', 'stickers', 'Stickers'),
-          loadGallery('gallery-memes', 'memes', 'Memes')
+          loadGallery('gallery-original', 'original'),
+          loadGallery('gallery-comms', 'comms'),
+          loadGallery('gallery-comic', 'comic'),
+          loadGallery('gallery-stickers', 'stickers'),
+          loadGallery('gallery-memes', 'memes')
         ]);
       });
-
-      // === PERF MONITOR ===
-      if ('PerformanceObserver' in window) {
-        try { const obs = new PerformanceObserver((list) => { list.getEntries().forEach(e => e.entryType === 'longtask' && console.debug('Long task:', e.duration, 'ms')); }); obs.observe({ entryTypes: ['longtask'] }); } catch (e) {}
-      }
     </script>
   </body>
 </html>
