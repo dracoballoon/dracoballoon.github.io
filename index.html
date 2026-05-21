@@ -77,10 +77,10 @@
       }
       .theme-ripple.animate { opacity: 1; transform: scale(4); }
       
-      /* ===== BANNER - IMAGE ONLY ===== */
+      /* ===== BANNER ===== */
       .banner { 
         width: 100%; height: 320px; display: flex; justify-content: center; align-items: center; 
-        margin-bottom: 45px; border-radius: var(--card-radius); overflow: hidden; position: relative; 
+        margin-bottom: 35px; border-radius: var(--card-radius); overflow: hidden; position: relative; 
         box-shadow: var(--shadow), var(--glow); border: 1px solid var(--border);
         transition: box-shadow 0.4s ease, border-color 0.4s ease;
       }
@@ -105,6 +105,57 @@
         transition: all 0.4s ease;
       }
       
+      /* ===== SOCIALS SECTION ===== */
+      .socials-section { margin: 40px 0 55px; text-align: center; }
+      .socials-section h2 {
+        font-size: 1.55rem; color: var(--accent-light); margin: 0 0 24px; 
+        padding-bottom: 10px; border-bottom: 1px solid var(--border); 
+        display: inline-flex; align-items: center; gap: 10px; 
+        text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
+        transition: color 0.4s ease, border-color 0.4s ease;
+      }
+      [data-theme="light"] .socials-section h2 { color: var(--accent); }
+      .socials-section h2::before { 
+        content: ""; width: 9px; height: 9px; background: var(--accent); 
+        border-radius: 50%; display: inline-block; 
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.5); transition: background 0.4s ease, box-shadow 0.4s ease;
+      }
+      .socials-grid {
+        display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;
+      }
+      .social-btn {
+        display: inline-flex; align-items: center; gap: 10px; padding: 14px 26px;
+        background: var(--card-bg); border: 1px solid var(--border);
+        border-radius: var(--card-radius); color: var(--fg);
+        font-family: 'Unbounded', sans-serif; font-size: 0.9rem; font-weight: 500;
+        text-decoration: none; cursor: pointer;
+        transition: all 0.25s ease, background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        box-shadow: var(--shadow);
+      }
+      .social-btn:hover {
+        background: var(--card-bg-hover); border-color: var(--border-hover);
+        color: var(--accent-light); transform: translateY(-3px);
+        box-shadow: var(--shadow-hover), var(--glow);
+      }
+      [data-theme="light"] .social-btn:hover { color: var(--accent); }
+      .social-btn svg, .social-btn img {
+        width: 22px; height: 22px; fill: currentColor; flex-shrink: 0;
+        transition: transform 0.25s ease;
+      }
+      .social-btn:hover svg, .social-btn:hover img { transform: scale(1.1); }
+
+      /* ===== DISCORD COPY TOOLTIP ===== */
+      .copy-btn { position: relative; cursor: pointer; }
+      .copy-btn .tooltip {
+        position: absolute; top: -36px; left: 50%; transform: translateX(-50%) translateY(2px);
+        background: var(--card-bg); border: 1px solid var(--border);
+        padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; color: var(--fg);
+        opacity: 0; pointer-events: none; transition: all 0.2s ease;
+        white-space: nowrap; box-shadow: var(--shadow); z-index: 10;
+      }
+      .copy-btn:hover .tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
+      
+      /* ===== GALLERY SECTIONS ===== */
       .gallery-section { margin: 65px 0; scroll-margin-top: 40px; transition: margin 0.4s ease; }
       .gallery-section h2 { 
         font-size: 1.55rem; color: var(--accent-light); margin: 0 0 22px; 
@@ -258,9 +309,9 @@
       @media (max-width: 600px) {
         .container { padding: 40px 16px 80px; } .banner { height: 195px; border-radius: 12px; }
         .banner h1 { font-size: 1.85rem; padding: 10px 16px; letter-spacing: 3px; } 
-        .gallery-section h2 { font-size: 1.3rem; }
+        .gallery-section h2 { font-size: 1.3rem; } .socials-section h2 { font-size: 1.3rem; }
         .image-placeholder { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-        .image-box { height: 200px; }
+        .image-box { height: 200px; } .social-btn { padding: 12px 20px; font-size: 0.85rem; }
         .lightbox-close { top: 10px; right: 15px; font-size: 1.75rem; width: 40px; height: 40px; }
         .theme-toggle { top: 12px; right: 12px; width: 42px; height: 42px; font-size: 1.1rem; }
       }
@@ -298,6 +349,29 @@
     <div class="container" id="siteContent">
       <div class="banner" id="page-top"><h1>DRACO</h1></div>
       
+      <!-- Socials Section -->
+      <div class="socials-section">
+        <h2>Socials</h2>
+        <div class="socials-grid">
+          <!-- Discord Copy Button -->
+          <button class="social-btn copy-btn" data-username="konstantin_von_de_dragojlovic." aria-label="Copy Discord Username">
+            <img src="assets/discord.svg" alt="Discord">
+            <span class="btn-text">Discord</span>
+            <span class="tooltip"></span>
+          </button>
+          <!-- Discord Server / Link Button -->
+          <a href="https://discord.gg/eNwEu29YX" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Discord Server">
+            <img src="assets/discord.svg" alt="Discord Server">
+            <span>Server</span>
+          </a>
+          <!-- Snapchat Button -->
+          <a href="https://snapchat.com/add/konstantin_ll" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Snapchat">
+            <img src="assets/snapchat.svg" alt="Snapchat">
+            <span>Snapchat</span>
+          </a>
+        </div>
+      </div>
+      
       <div class="gallery-section"><h2>Original</h2><div id="gallery-original" class="image-placeholder" aria-busy="true"><div class="gallery-loading">Loading original pieces...</div></div><div class="show-more-container" id="showmore-original"></div></div>
       <div class="gallery-section"><h2>Comms</h2><div id="gallery-comms" class="image-placeholder" aria-busy="true"><div class="gallery-loading">Loading commissions...</div></div><div class="show-more-container" id="showmore-comms"></div></div>
       <div class="gallery-section"><h2>Comic</h2><div id="gallery-comic" class="image-placeholder" aria-busy="true"><div class="gallery-loading">Loading comic artworks...</div></div><div class="show-more-container" id="showmore-comic"></div></div>
@@ -310,18 +384,15 @@
     <script>
       // === THEME MANAGEMENT ===
       const ThemeManager = {
-        STORAGE_KEY: 'draco-theme-preference',
-        DEFAULT: 'dark',
+        STORAGE_KEY: 'draco-theme-preference', DEFAULT: 'dark',
         init() {
           const saved = localStorage.getItem(this.STORAGE_KEY);
           document.documentElement.setAttribute('data-theme', saved || this.DEFAULT);
           document.getElementById('themeToggle')?.addEventListener('click', () => this.toggle());
         },
         toggle() {
-          const current = document.documentElement.getAttribute('data-theme');
-          const next = current === 'dark' ? 'light' : 'dark';
-          this.applyWithAnimation(next);
-          localStorage.setItem(this.STORAGE_KEY, next);
+          const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          this.applyWithAnimation(next); localStorage.setItem(this.STORAGE_KEY, next);
         },
         applyWithAnimation(theme) {
           const ripple = document.getElementById('themeRipple');
@@ -330,14 +401,9 @@
             ripple.style.left = `${btn.left + btn.width/2}px`;
             ripple.style.top = `${btn.top + btn.height/2}px`;
             ripple.classList.add('animate');
-            setTimeout(() => {
-              document.documentElement.setAttribute('data-theme', theme);
-              ripple.classList.remove('animate');
-            }, 150);
+            setTimeout(() => { document.documentElement.setAttribute('data-theme', theme); ripple.classList.remove('animate'); }, 150);
             setTimeout(() => ripple.classList.remove('animate'), 500);
-          } else {
-            document.documentElement.setAttribute('data-theme', theme);
-          }
+          } else { document.documentElement.setAttribute('data-theme', theme); }
         }
       };
 
@@ -346,11 +412,8 @@
         INITIAL_LOAD: 8, CACHE_TTL: 24 * 60 * 60 * 1000,
         API_BASE: 'https://api.github.com/repos/dracoballoon/dracoballoon.github.io/contents/projects',
         FALLBACK_IMAGES: {
-          original: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Original'],
-          comms: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Comms'],
-          comic: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Comic'],
-          stickers: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Stickers'],
-          memes: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Memes']
+          original: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Original'], comms: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Comms'],
+          comic: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Comic'], stickers: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Stickers'], memes: ['https://via.placeholder.com/400x500/2a2a2d/b81a2e?text=Memes']
         },
         LOADER_DURATION: 5000, QUOTE_INTERVAL: 2800
       };
@@ -365,13 +428,7 @@
 
       // === STATE ===
       const state = {
-        galleries: {
-          original: { images: [], expanded: false, loaded: false },
-          comms: { images: [], expanded: false, loaded: false },
-          comic: { images: [], expanded: false, loaded: false },
-          stickers: { images: [], expanded: false, loaded: false },
-          memes: { images: [], expanded: false, loaded: false }
-        },
+        galleries: { original: {images:[], expanded:false, loaded:false}, comms: {images:[], expanded:false, loaded:false}, comic: {images:[], expanded:false, loaded:false}, stickers: {images:[], expanded:false, loaded:false}, memes: {images:[], expanded:false, loaded:false} },
         loaderHidden: false, quoteInterval: null, currentQuoteIndex: 0
       };
 
@@ -379,176 +436,106 @@
       const cache = {
         get(key) {
           try {
-            const item = localStorage.getItem(`draco:${key}`);
-            if (!item) return null;
+            const item = localStorage.getItem(`draco:${key}`); if (!item) return null;
             const { data, timestamp } = JSON.parse(item);
             if (Date.now() - timestamp > CONFIG.CACHE_TTL) { localStorage.removeItem(`draco:${key}`); return null; }
             return data;
           } catch { return null; }
         },
-        set(key, data) {
-          try { localStorage.setItem(`draco:${key}`, JSON.stringify({ data, timestamp: Date.now() })); }
-          catch (e) { console.warn('Cache write failed:', e); }
-        }
+        set(key, data) { try { localStorage.setItem(`draco:${key}`, JSON.stringify({ data, timestamp: Date.now() })); } catch (e) { console.warn('Cache write failed:', e); } }
       };
 
-      // === QUOTE ROTATOR ===
+      // === LOADER & QUOTES ===
       function startQuoteRotation() {
-        const quoteEl = document.getElementById('loaderQuote');
-        if (!quoteEl) return;
+        const quoteEl = document.getElementById('loaderQuote'); if (!quoteEl) return;
         state.currentQuoteIndex = Math.floor(Math.random() * LOADER_QUOTES.length);
         quoteEl.textContent = LOADER_QUOTES[state.currentQuoteIndex];
         state.quoteInterval = setInterval(() => {
           state.currentQuoteIndex = (state.currentQuoteIndex + 1) % LOADER_QUOTES.length;
-          quoteEl.style.transition = 'opacity 0.2s ease';
-          quoteEl.style.opacity = '0.4';
+          quoteEl.style.transition = 'opacity 0.2s ease'; quoteEl.style.opacity = '0.4';
           setTimeout(() => { quoteEl.textContent = LOADER_QUOTES[state.currentQuoteIndex]; quoteEl.style.opacity = '0.75'; }, 200);
         }, CONFIG.QUOTE_INTERVAL);
       }
-
-      function stopQuoteRotation() {
-        if (state.quoteInterval) { clearInterval(state.quoteInterval); state.quoteInterval = null; }
-      }
-
-      function releaseScroll() {
-        document.body.style.overflow = '';
-        document.documentElement.style.overflow = '';
-      }
-
-      function hideLoader() {
-        if (state.loaderHidden) return;
-        stopQuoteRotation();
-        const loader = document.getElementById('siteLoader');
-        if (loader) {
-          loader.classList.add('hidden');
-          releaseScroll();
-          state.loaderHidden = true;
-        }
-      }
+      function stopQuoteRotation() { if (state.quoteInterval) { clearInterval(state.quoteInterval); state.quoteInterval = null; } }
+      function releaseScroll() { document.body.style.overflow = ''; document.documentElement.style.overflow = ''; }
+      function hideLoader() { if (state.loaderHidden) return; stopQuoteRotation(); const loader = document.getElementById('siteLoader'); if (loader) { loader.classList.add('hidden'); releaseScroll(); state.loaderHidden = true; } }
 
       // === LIGHTBOX ===
       const lightbox = {
-        el: document.getElementById('lightbox'),
-        img: document.getElementById('lightboxImage'),
-        closeBtn: document.getElementById('lightboxClose'),
-        overlay: document.getElementById('lightboxOverlay'),
-        open(src) {
-          if (!this.el || !this.img) return;
-          this.img.src = src;
-          this.el.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        },
-        close() {
-          if (!this.el) return;
-          this.el.classList.remove('active');
-          releaseScroll();
-          setTimeout(() => { if (this.img) this.img.src = ''; }, 300);
-        },
-        init() {
-          if (!this.closeBtn || !this.overlay) return;
-          this.closeBtn.addEventListener('click', () => this.close());
-          this.overlay.addEventListener('click', () => this.close());
-          document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && this.el.classList.contains('active')) this.close(); });
-        }
+        el: document.getElementById('lightbox'), img: document.getElementById('lightboxImage'),
+        closeBtn: document.getElementById('lightboxClose'), overlay: document.getElementById('lightboxOverlay'),
+        open(src) { if (!this.el || !this.img) return; this.img.src = src; this.el.classList.add('active'); document.body.style.overflow = 'hidden'; },
+        close() { if (!this.el) return; this.el.classList.remove('active'); releaseScroll(); setTimeout(() => { if (this.img) this.img.src = ''; }, 300); },
+        init() { if (!this.closeBtn || !this.overlay) return; this.closeBtn.addEventListener('click', () => this.close()); this.overlay.addEventListener('click', () => this.close()); document.addEventListener('keydown', e => { if (e.key === 'Escape' && this.el.classList.contains('active')) this.close(); }); }
       };
 
-      // === LAZY IMAGE LOADER ===
+      // === LAZY LOADER ===
       class LazyImageLoader {
-        constructor() { this.observer = null; this.init(); }
-        init() {
-          if ('IntersectionObserver' in window) {
-            this.observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) { this.loadImage(entry.target); this.observer.unobserve(entry.target); }
-              });
-            }, { rootMargin: '100px' });
-          }
-        }
-        loadImage(img) {
-          const src = img.dataset.src; if (!src) return;
-          const temp = new Image();
-          temp.onload = () => { img.src = src; img.classList.add('loaded'); };
-          temp.onerror = () => { img.src = img.dataset.fallback; };
-          temp.src = src; img.removeAttribute('data-src');
-        }
-        observe(img) { if (this.observer && img.dataset.src) this.observer.observe(img); else if (img.dataset.src) this.loadImage(img); }
+        constructor() { this.ob = null; this.init(); }
+        init() { if ('IntersectionObserver' in window) { this.ob = new IntersectionObserver(e => e.forEach(i => { if(i.isIntersecting){ this.load(i.target); this.ob.unobserve(i.target); } }), {rootMargin:'100px'}); } }
+        load(img) { if(!img.dataset.src) return; const t=new Image(); t.onload=()=>img.src=img.dataset.src; t.onerror=()=>img.src=img.dataset.fallback; t.src=img.dataset.src; img.removeAttribute('data-src'); }
+        observe(img) { if(img.dataset.src) this.ob ? this.ob.observe(img) : this.load(img); }
       }
-      const lazyLoader = new LazyImageLoader();
+      const lazy = new LazyImageLoader();
 
-      // === GALLERY LOADING ===
-      async function loadGallery(containerId, folderName) {
-        const container = document.getElementById(containerId); const cacheKey = `gallery:${folderName}`;
+      // === GALLERY ===
+      async function loadGallery(id, folder) {
+        const container = document.getElementById(id); if(!container) return; state.galleries[folder]={images:[], expanded:false};
         try {
-          let files = cache.get(cacheKey);
-          if (!files) {
-            const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 8000);
-            const response = await fetch(`${CONFIG.API_BASE}/${folderName}`, { signal: controller.signal, headers: { 'Accept': 'application/vnd.github.v3+json' } });
-            clearTimeout(timeout); if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            files = await response.json(); cache.set(cacheKey, files);
-          }
-          const images = files.filter(f => f.type === 'file' && /\.(png|jpg|jpeg|gif|webp|svg)$/i.test(f.name))
-            .sort((a, b) => { const na = parseInt(a.name), nb = parseInt(b.name); return (!isNaN(na) && !isNaN(nb)) ? na - nb : a.name.localeCompare(b.name, 'en', { numeric: true }); }).slice(0, 50);
-          state.galleries[folderName].images = images.map((f, i) => ({ title: f.name.replace(/\.[^/.]+$/, "").replace(/[_-]/g, ' '), url: f.download_url, width: 400, height: 500 }));
-          state.galleries[folderName].loaded = true; renderGallery(containerId, folderName, false);
-        } catch (err) {
-          console.warn(`Gallery ${folderName} failed:`, err.message);
-          state.galleries[folderName].images = CONFIG.FALLBACK_IMAGES[folderName].map((url, i) => ({ title: `Artwork ${i + 1}`, url, width: 400, height: 500 }));
-          state.galleries[folderName].loaded = true; renderGallery(containerId, folderName, false);
+          const res = await fetch(`${CONFIG.API_BASE}/${folder}`, {headers:{'Accept':'application/vnd.github.v3+json'}});
+          if(!res.ok) throw new Error(res.status);
+          const files = (await res.json()).filter(f=>f.type==='file'&&/\.(png|jpg|jpeg|gif|webp|svg)$/i.test(f.name));
+          state.galleries[folder].images=files.map(f=>({url:f.download_url, title:f.name.replace(/\.[^/.]+$/,"").replace(/[_-]/g,' ')}));
+        } catch(e) { console.warn(e); state.galleries[folder].images=[{url:CONFIG.FALLBACK_IMAGES[folder][0], title:folder}]; }
+        render(id, folder);
+      }
+
+      function render(id, folder, expand=false) {
+        const container = document.getElementById(id); if(!container) return; const data=state.galleries[folder];
+        const count=expand?data.images.length:Math.min(CONFIG.INITIAL_LOAD, data.images.length); container.innerHTML=''; container.setAttribute('aria-busy','false');
+        for(let i=0;i<count;i++){
+          const b=document.createElement('div'); b.className='image-box';
+          const img=document.createElement('img'); img.className='thumb'; img.alt=data.images[i].title;
+          img.dataset.src=data.images[i].url; img.dataset.fallback=CONFIG.FALLBACK_IMAGES[folder]?.[0];
+          img.loading='lazy'; b.addEventListener('click', ()=>lightbox.open(data.images[i].url));
+          b.appendChild(img); container.appendChild(b); lazy.observe(img);
+        }
+        const sm=document.getElementById(`showmore-${folder}`);
+        if(sm && data.images.length>CONFIG.INITIAL_LOAD){
+          const ex=data.expanded; sm.innerHTML=`<button class="toggle-btn" onclick="toggle('${folder}')">${ex?'Less':'More'} <span class="arrow">${ex?'▲':'▼'}</span></button>`;
         }
       }
+      window.toggle=(folder)=>{const d=state.galleries[folder]; if(!d) return; d.expanded=!d.expanded; render(`gallery-${folder}`, folder, d.expanded);};
 
-      function renderGallery(containerId, folderName, expanded) {
-        const container = document.getElementById(containerId); if (!container) return;
-        const data = state.galleries[folderName];
-        const count = expanded ? data.images.length : Math.min(CONFIG.INITIAL_LOAD, data.images.length);
-        const fragment = document.createDocumentFragment(); container.innerHTML = '';
-        for (let i = 0; i < count; i++) {
-          const img = data.images[i]; const box = document.createElement('div');
-          box.className = 'image-box'; box.setAttribute('role', 'article'); box.setAttribute('aria-label', `Artwork ${i + 1}`);
-          const imageEl = document.createElement('img'); imageEl.className = 'thumb'; imageEl.alt = `Artwork ${i + 1}`;
-          imageEl.loading = 'lazy'; imageEl.decoding = 'async';
-          imageEl.dataset.src = img.url; imageEl.dataset.fallback = CONFIG.FALLBACK_IMAGES[folderName]?.[0];
-          imageEl.style.aspectRatio = `${img.width}/${img.height}`;
-          box.addEventListener('click', () => { lightbox.open(img.url); });
-          box.appendChild(imageEl); fragment.appendChild(box); lazyLoader.observe(imageEl);
-        }
-        container.appendChild(fragment); container.setAttribute('aria-busy', 'false'); updateToggleButton(folderName);
+      // === DISCORD COPY FUNCTIONALITY ===
+      const copyBtn = document.querySelector('.copy-btn');
+      if (copyBtn) {
+        const tooltip = copyBtn.querySelector('.tooltip');
+        const username = copyBtn.dataset.username || 'discord_user';
+        tooltip.textContent = username;
+        
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText(username).then(() => {
+            const txt = copyBtn.querySelector('.btn-text');
+            const orig = txt.textContent;
+            txt.textContent = 'Copied!';
+            copyBtn.style.borderColor = 'var(--accent-light)';
+            setTimeout(() => { txt.textContent = orig; copyBtn.style.borderColor = ''; }, 2000);
+          }).catch(e => console.error('Copy failed:', e));
+        });
       }
-
-      function updateToggleButton(folderName) {
-        const container = document.getElementById(`showmore-${folderName}`); if (!container) return;
-        const total = state.galleries[folderName].images.length;
-        if (total <= CONFIG.INITIAL_LOAD) { container.innerHTML = ''; return; }
-        const isExpanded = state.galleries[folderName].expanded;
-        const arrow = isExpanded ? '▲' : '▼'; const text = isExpanded ? 'Less' : `More (${total - CONFIG.INITIAL_LOAD}+)`;
-        container.innerHTML = `<button class="toggle-btn" onclick="window.toggleGallery('${folderName}')" aria-expanded="${isExpanded}">${text} <span class="arrow" aria-hidden="true">${arrow}</span></button>`;
-      }
-
-      window.toggleGallery = function(folderName) {
-        const data = state.galleries[folderName]; if (!data) return;
-        data.expanded = !data.expanded; renderGallery(`gallery-${folderName}`, folderName, data.expanded);
-        const section = document.querySelector(`#gallery-${folderName}`)?.closest('.gallery-section');
-        if (section && data.expanded) section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      };
 
       // === INIT ===
       document.addEventListener('DOMContentLoaded', () => {
         ThemeManager.init();
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        document.getElementById('year').textContent = new Date().getFullYear();
-        startQuoteRotation();
-        setTimeout(() => hideLoader(), CONFIG.LOADER_DURATION);
-        setTimeout(() => releaseScroll(), CONFIG.LOADER_DURATION + 100);
+        if('scrollRestoration' in history) history.scrollRestoration='manual';
+        document.getElementById('year').textContent=new Date().getFullYear();
+        startQuoteRotation(); setTimeout(()=>hideLoader(), CONFIG.LOADER_DURATION);
+        setTimeout(()=>releaseScroll(), CONFIG.LOADER_DURATION+100);
         lightbox.init();
         const banner = document.querySelector('.banner');
-        if (banner) { const bg = new Image(); bg.onload = bg.onerror = () => banner.classList.add('loaded'); bg.src = 'https://dayowen.github.io/assets/banner.jpeg'; }
-        Promise.allSettled([
-          loadGallery('gallery-original', 'original'),
-          loadGallery('gallery-comms', 'comms'),
-          loadGallery('gallery-comic', 'comic'),
-          loadGallery('gallery-stickers', 'stickers'),
-          loadGallery('gallery-memes', 'memes')
-        ]);
+        if(banner){const bg=new Image(); bg.onload=bg.onerror=()=>banner.classList.add('loaded'); bg.src='https://dayowen.github.io/assets/banner.jpeg';}
+        ['original','comms','comic','stickers','memes'].forEach(f=>loadGallery(`gallery-${f}`, f));
       });
     </script>
   </body>
