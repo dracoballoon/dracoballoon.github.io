@@ -540,6 +540,11 @@
             <img src="assets/discord.svg" alt="Discord Server">
             <span>Server</span>
           </a>
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@draco_the_dragon0" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <img src="assets/tiktok.svg" alt="TikTok Account">
+            <span>TikTok</span>
+          </a>
         </div>
       </div>
       
@@ -550,6 +555,15 @@
           <div class="gallery-loading">Loading original pieces...</div>
         </div>
         <div class="show-more-container" id="showmore-original"></div>
+      </div>
+
+      <!-- DxD Section -->
+      <div class="gallery-section">
+        <h2>Draco x Diane</h2>
+        <div id="gallery-dxd" class="image-placeholder" aria-busy="true">
+          <div class="gallery-loading">Loading Draco x Diane pieces...</div>
+        </div>
+        <div class="show-more-container" id="showmore-dxd"></div>
       </div>
       
       <!-- Comms Section -->
@@ -634,6 +648,7 @@
         API_BASE: 'https://api.github.com/repos/dracoballoon/dracoballoon.github.io/contents/projects',
         FALLBACK_IMAGES: {
           original: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Original'],
+          dxd: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Draco x Diane'],
           comms: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Comms'],
           comic: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Comic'],
           stickers: ['https://via.placeholder.com/400x500/141414/b81a2e?text=Stickers'],
@@ -666,6 +681,7 @@
       const state = {
         galleries: {
           original: { images: [], expanded: false, loaded: false },
+          dxd: { images: [], expanded: false, loaded: false },
           comms: { images: [], expanded: false, loaded: false },
           comic: { images: [], expanded: false, loaded: false },
           stickers: { images: [], expanded: false, loaded: false },
@@ -1012,6 +1028,7 @@
         // Load galleries in new order
         Promise.allSettled([
           loadGallery('gallery-original', 'original', 'Original'),
+          loadGallery('gallery-dxd', 'dxd', 'Draco x Diane'),
           loadGallery('gallery-comms', 'comms', 'Comms'),
           loadGallery('gallery-comic', 'comic', 'Comic'),
           loadGallery('gallery-stickers', 'stickers', 'Stickers'),
